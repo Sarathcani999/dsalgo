@@ -1,0 +1,48 @@
+Find the greatest element that is smaller than the given element
+
+Given an array and a target. You wan't to find the index of the greatest element in the array which is strictly smaller than the target. If no element is found then return -1.
+
+Example:
+[In]:
+5
+1 2 3 4 5 6
+
+[Out]:
+4
+
+[In]:
+6
+1 2 3 4 5 6
+
+[Out]:
+4
+
+Pseudo code:
+
+find(arr, target) {
+    s = 0;
+    e = arr.length - 1;
+
+    while (s <= e) {
+        mid = (s + e) // 2;
+        if (target > arr[mid]) s = mid + 1;
+        if (target <= arr[mid]) e = mid -1;
+    }
+    if (e < 0) return -1;
+    return e;
+}
+
+Dry Run
+target = 1
+1 2 3 3 3 6
+0 1 2 3 4 5
+s   m     e
+
+1 2 3 3 3 6
+0 1 2 3 4 5
+s e
+m
+
+  1 2 3 3 3 6
+  0 1 2 3 4 5
+e s

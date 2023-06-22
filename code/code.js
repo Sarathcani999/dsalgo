@@ -26,4 +26,6 @@ function readline() {
 /* Main Function */
 function main() {
     /* Write your code here */
+    let line = readline();
+    console.log(line);
 }

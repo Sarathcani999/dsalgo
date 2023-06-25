@@ -22,8 +22,3 @@
 - Recursion
 - Backtracking
 - Dynamic Programming
-
-```mermaid
-flowchart LR
-S --> R
-```

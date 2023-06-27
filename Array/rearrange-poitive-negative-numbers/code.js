@@ -25,18 +25,28 @@ function readline() {
   return inputString[currentLine++];
 }
 /* Driver Code End */
-function kadanesAlgorithm(nums) {
-  let maxValue = 0;
-  let currentRunningSum = 0;
-  for (let windowEnd = 0; windowEnd < nums.length; windowEnd++) {
-    currentRunningSum += nums[windowEnd];
-    maxValue = Math.max(maxValue, currentRunningSum);
-    if (currentRunningSum < 0) {
-      currentRunningSum = 0;
+function swap(nums, i, j) {
+  [nums[i], nums[j]] = [nums[j], nums[i]];
+}
+
+function rearrangePositiveNegative(nums) {
+  let i = 0;
+  let j = nums.length - 1;
+  while (i < j) {
+    if (nums[i] > 0) {
+      if (nums[j] < 0) {
+        j--;
+      }
+      i++;
+    } else {
+      if (nums[j] > 0) {
+        swap(nums, i, j);
+        i++;
+      }
+      j--;
     }
   }
-
-  return maxValue;
+  return nums;
 }
 
 /* Main Function */
@@ -48,7 +58,7 @@ function main() {
     const nums = readline()
       .split(" ")
       .map((val) => Number.parseInt(val));
-    const ans = kadanesAlgorithm(nums)
+    const ans = rearrangePositiveNegative(nums);
     console.log(ans);
   }
 }

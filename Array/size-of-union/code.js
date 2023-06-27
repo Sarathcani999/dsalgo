@@ -25,18 +25,13 @@ function readline() {
   return inputString[currentLine++];
 }
 /* Driver Code End */
-function kadanesAlgorithm(nums) {
-  let maxValue = 0;
-  let currentRunningSum = 0;
-  for (let windowEnd = 0; windowEnd < nums.length; windowEnd++) {
-    currentRunningSum += nums[windowEnd];
-    maxValue = Math.max(maxValue, currentRunningSum);
-    if (currentRunningSum < 0) {
-      currentRunningSum = 0;
-    }
-  }
+function swap(nums, i, j) {
+  [nums[i], nums[j]] = [nums[j], nums[i]];
+}
 
-  return maxValue;
+function sizeOfUnion(a, b) {
+  let set = new Set([...a, ...b]);
+  return set.size;
 }
 
 /* Main Function */
@@ -45,10 +40,13 @@ function main() {
   const t = Number.parseInt(readline());
 
   for (let i = 0; i < t; i++) {
-    const nums = readline()
+    const a = readline()
       .split(" ")
       .map((val) => Number.parseInt(val));
-    const ans = kadanesAlgorithm(nums)
+    const b = readline()
+      .split(" ")
+      .map((val) => Number.parseInt(val));
+    const ans = sizeOfUnion(a, b);
     console.log(ans);
   }
 }

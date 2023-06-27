@@ -5,8 +5,7 @@
 - Strings
 - Maths
 - Bit operations
-- Set
-- Hashmap
+- Set, Hashmap
 - Stack
 - Queue
 - Linked List

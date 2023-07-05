@@ -25,16 +25,20 @@ function readline() {
   return inputString[currentLine++];
 }
 /* Driver Code End */
-function soass(arr, ind = arr.length - 1, dp) {
-  if (ind < 0) return 0;
 
-  if (dp[ind] !== -1) return dp[ind];
+function frogJump(N, heights, dp) {
+  if (N === 0) return 0;
+  if (N === 1) return Math.abs(heights[N] - heights[0]);
 
-  const pick = arr[ind] + soass(arr, ind - 2, dp);
-  const notpick = 0 + soass(arr, ind - 1, dp);
+  if (dp[N] !== -1) return dp[N];
 
-  dp[ind] = Math.max(pick, notpick);
-  return dp[ind];
+  const case1 =
+    frogJump(N - 1, heights, dp) + Math.abs(heights[N] - heights[N - 1]);
+  const case2 =
+    frogJump(N - 2, heights, dp) + Math.abs(heights[N] - heights[N - 2]);
+
+  dp[N] = Math.min(case1, case2);
+  return dp[N];
 }
 
 /* Main Function */
@@ -43,20 +47,14 @@ function main() {
   const T = Number.parseInt(readline());
   for (let i = 0; i < T; i++) {
     // read inputs here
-    const arr = readline()
+    const N = Number.parseInt(readline());
+    const heights = readline()
       .split(" ")
       .map((val) => Number.parseInt(val));
 
-    const dp1 = Array(arr.length).fill(-1);
-    const dp2 = Array(arr.length).fill(-1);
+    const dp = Array(N).fill(-1);
 
-    const arr1 = arr.slice(0, arr.length - 1);
-    const arr2 = arr.slice(1, arr.length);
-
-    const case1 = soass(arr1, arr1.length - 1, dp1);
-    const case2 = soass(arr2, arr2.length - 1, dp2);
-
-    const ans = Math.max(case1, case2);
+    const ans = frogJump(N - 1, heights, dp);
     console.log(ans);
   }
 }

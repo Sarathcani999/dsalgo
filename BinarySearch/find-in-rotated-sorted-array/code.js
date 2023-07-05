@@ -25,16 +25,33 @@ function readline() {
   return inputString[currentLine++];
 }
 /* Driver Code End */
-function soass(arr, ind = arr.length - 1, dp) {
-  if (ind < 0) return 0;
+function findinrotatedsortedarr(arr, target) {
+  let l = 0;
+  let h = arr.length - 1;
+  while (l <= h) {
+    const mid = Math.floor((l + h) / 2);
+    const midVal = arr[mid];
+    const firstVal = arr[l];
+    const lastVal = arr[h];
 
-  if (dp[ind] !== -1) return dp[ind];
+    if (target === midVal) return mid;
 
-  const pick = arr[ind] + soass(arr, ind - 2, dp);
-  const notpick = 0 + soass(arr, ind - 1, dp);
+    if (firstVal <= midVal) {
+      if (target <= midVal && target >= firstVal) {
+        h = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    } else {
+      if (target <= lastVal && target >= midVal) {
+        l = mid + 1;
+      } else {
+        h = mid - 1;
+      }
+    }
+  }
 
-  dp[ind] = Math.max(pick, notpick);
-  return dp[ind];
+  return -1;
 }
 
 /* Main Function */
@@ -43,20 +60,12 @@ function main() {
   const T = Number.parseInt(readline());
   for (let i = 0; i < T; i++) {
     // read inputs here
+    const target = Number.parseInt(readline());
     const arr = readline()
       .split(" ")
       .map((val) => Number.parseInt(val));
 
-    const dp1 = Array(arr.length).fill(-1);
-    const dp2 = Array(arr.length).fill(-1);
-
-    const arr1 = arr.slice(0, arr.length - 1);
-    const arr2 = arr.slice(1, arr.length);
-
-    const case1 = soass(arr1, arr1.length - 1, dp1);
-    const case2 = soass(arr2, arr2.length - 1, dp2);
-
-    const ans = Math.max(case1, case2);
+    const ans = findinrotatedsortedarr(arr, target);
     console.log(ans);
   }
 }

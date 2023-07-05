@@ -85,6 +85,7 @@ when this condition comes we can do a skip that is **l++ and h--**
 Here in the binary search we have the left portion and the right portion. The left portion can be sorted or unsorted. The right portion can be sorted or unsorted.
 
 We have the following cases
+
 |left|right|inference|
 |-|-|-|
 |sorted|sorted| check if left[0] is a min value, eliminate left|

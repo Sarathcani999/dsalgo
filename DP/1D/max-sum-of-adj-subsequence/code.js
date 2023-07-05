@@ -47,16 +47,9 @@ function main() {
       .split(" ")
       .map((val) => Number.parseInt(val));
 
-    const dp1 = Array(arr.length).fill(-1);
-    const dp2 = Array(arr.length).fill(-1);
+    const dp = Array(arr.length).fill(-1);
 
-    const arr1 = arr.slice(0, arr.length - 1);
-    const arr2 = arr.slice(1, arr.length);
-
-    const case1 = soass(arr1, arr1.length - 1, dp1);
-    const case2 = soass(arr2, arr2.length - 1, dp2);
-
-    const ans = Math.max(case1, case2);
+    const ans = soass(arr, arr.length - 1, dp);
     console.log(ans);
   }
 }
